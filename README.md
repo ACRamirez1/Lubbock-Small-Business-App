@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+Framework for Checkpoint 2: Small Business App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bring in the Thunk app as a base framework.
 
-## Available Scripts
+I will need to have 2 parts to this. A login page, and parts that is accessible publicly. 
 
-In the project directory, you can run:
+Tab 1 Listing
+Tab 2 Details
+Tab 3 Sign-In 
+Tab 4 Admin
+Tab 5 Add New Listing
 
-### `npm start`
+**TECHNICAL FRAMEWORK AFTER DESCRIPTION**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Listing Page when LOGGED OUT
+	-Table
+		-Business Name
+		-Description
+		-Hours(operating hours)
+		-Address
+		-Phone Number
+		-Website
+	-Pagination?? Yes or no?
+	-Will I add multiple businesses', if so that pagination may be a good thing so I don't take away from the user experience.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Details Page
+	-Google Maps API for this.
+	-Details from the listing page should be presented. 
+	-User-friendly
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Sign-In Page
+	-Two fields;  Username and password
+	-Make sure to use "type" of password input so that we cannot see which characters we are typing.
+	-Upon login, the user cookies and possibly store the user in the redux state. That's up to me. 
+	-Once logged in, 
+		-add a small bar below the navbar, that exists on every page while logged in, that notifies the user they are logged in and shows their username. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Requirements for a logged-in user
+Do conditional rendering on the login page so that the "login" link doesn't show up when you login; instead, it shows logout.
+	-Only a user can delete a listing.
+	-Only a user can navigate to the "/add" page which should be protected by a Private route. 
+	-Only a user has access to the "admin view"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Requirements/capabilities for a logged-out user
+	-Can see the "listing" page.
+	-Can see the "details" page.
+	*WHEN THE USER LOGS OUT, REMOVE THE COOKIES AND RESET THE 'USER' STATE IN REDUX.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Admin Page when LOGGED IN
+	*EVERYTHING FROM THE ABOVE LISTING PAGE
+	-Conditionally render a 'delete' column on that table with an icon so that the user can delete a given row. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Add New Listing Page
+	-Provide a form with which the logged-in user can enter data about a new small business and save it.
+	-Once saved, it should be added to the Redux store and should automatically be populated in the Listing table when you navigate back to that page.
+	-This "Add" page should be protected by a private route which means a user can't navigate to it if they are not logged in.
+	-Update the Google Map as you fill out the address field so that the user gets a preview regarding the address.
+	-You would do something like that using the componentDidUpdate functionality of a class component.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**TECHNICAL FRAMEWORK**
 
-## Learn More
+Components
+    -Header 
+        -Header display is on all pages.
+            -LBK Small Business
+            -'Listing'
+        -With conditional ternary operator for filtering when logged in.
+            -Displays 'Listing' and 'Login' when logged out.
+            -Displays 'Listing', 'Add' and 'LOGOUT' when logged in.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    Sign-In
+        -no need to authenticate user.
+        -once logged in, switch login button to display 'logout' until user logs out. 
+        -once logged out, remove cookies and reset the 'user' state in redux. 
+        -Ternary operator brings in 'app bar' that shows 'Logged in as: username' when logged in.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    Listing
+        -brings in business information from API calls
 
-### Code Splitting
+    Add New Listing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Import 
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+	
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Redux State
+	-user
+	-listings
+	-map
 
-### Advanced Configuration
+Redux Actions
+    -delete a listing
+    -add a listing
+    -login/logout
+    -fetch coordinates for your map
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+React Router
+    -search 'Private Routes React' in Google or look at previous homework. 
+    -Private Routes
+        -Add New Listing
+        -Admin View
+        -Delete function
+    Your "isAuthenticated" function that complements the private route may use the "cookie" npm package to parse the cookie. Remember you can set a cookie by writing document.cookie = "user=<USERNAME>;max-age=60*1000*5;
 
-### Deployment
+Login
+    -you do not have to validate the login. Using any username and password combo is okay for this project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Add Listing
+    If you use componentDidUpdate you'll know when certain properties of state have changed. You'll probably be changing these properties as you type in the Text field. If the address has changed, you can use this to call your getCoordinates action (or whatever you named it) and get the lat/lng for your map. This will allow you to update your map in real time.
