@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router';
 import cookie from 'cookie';
 import Login from './components/Login';
 import Home from './containers/HomeContainer';
-import AddNewListing from './components/AddNewListing';
+import AddNewListing from './containers/AddNewListingContainer';
 import Details from './containers/DetailContainer';
 
 

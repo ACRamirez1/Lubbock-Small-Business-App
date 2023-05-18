@@ -10,7 +10,7 @@ const Map = (props) => {
         title="addedNewListing"
         style={{ border: 0 }}
         loading="lazy"
-        allowfullscreen
+        allowFullScreen
         src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCh5I0uYvNQrOBIhNw0K9ZNCZWuCGusuEQ&q=${props.address}`}
       ></iframe>
     </div>

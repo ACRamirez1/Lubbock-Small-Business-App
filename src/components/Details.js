@@ -8,7 +8,7 @@ import Map from './Map';
 
 
 const Details = (props) => {
-  console.log(props)
+  console.log('details props', props)
   let {id} = useParams();
   const listing = props.listings.find(l => l.id == id)
 

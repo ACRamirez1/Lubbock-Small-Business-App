@@ -10,17 +10,29 @@
     gap: 15px
   }
 
-  /* .navButton {
-    color: #FFF;
+  a {
     text-decoration: none;
-  } */
-
-  nav a.active {
-    text-decoration: none;
-
+    color: inherit;
   }
 
-  nav {
-    color: #FFF;
-    padding: 10px;
+  ul {
+    padding-inline-start: 20px;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+  }
+
+  .nav-list-item {
+    margin: auto 20px;
+  }
+  
+  .nav-list-item:hover {
+    cursor: pointer;
+  }
+
+  .businessName {
+    text-decoration: underline;
+    font-weight: bold;
   }

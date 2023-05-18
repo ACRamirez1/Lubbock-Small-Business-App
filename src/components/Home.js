@@ -8,9 +8,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from  'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import cookie from 'cookie'
 
 
 const Home = (props) => {
+
+  const cookies = cookie.parse(document.cookie);
   console.log(props)
   return (
     <TableContainer component={Paper}>
@@ -18,10 +21,11 @@ const Home = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Hours</TableCell>
-            <TableCell align="right">Address</TableCell>
-            <TableCell align="right">Delete</TableCell>
+            <TableCell align="left">Description</TableCell>
+            <TableCell align="left">Hours</TableCell>
+            <TableCell align="left">Address</TableCell>
+            
+            {cookies['loggedin'] ? <TableCell align="left">Delete</TableCell> : null}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -31,17 +35,19 @@ const Home = (props) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-              <Link to={`/details/${listing.id}`}>{listing.Business_Name}</Link>
+              <Link className='businessName' to={`/details/${listing.id}`}>{listing.Business_Name}</Link>
               </TableCell>
-              <TableCell align="right">{listing.Description}</TableCell>
-              <TableCell align="right">{listing.Hours}</TableCell>
-              <TableCell align="right">{listing.Address}</TableCell>
-              <TableCell align="right">
-                <DeleteIcon
+              <TableCell align="left">{listing.Description}</TableCell>
+              <TableCell align="left">{listing.Hours}</TableCell>
+              <TableCell align="left">{listing.Address}</TableCell>
+              {cookies['loggedin'] ? <TableCell align="left">
+                <DeleteIcon style={{
+                  color: 'red'
+                }}
                                 // add onClick method here
                                 onClick={() => props.deleteListing(idx)}
                                 className="icon text-red" />
-                                </TableCell>
+                                </TableCell> : null}
             </TableRow>
           ))}
         </TableBody>
